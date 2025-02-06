@@ -1,0 +1,23 @@
+<p>Residences works!</p>
+
+<div *ngFor="let residence of listResidences">
+  <h3>{{ residence.name }}</h3>
+  <img [src]="residence.image" alt="{{ residence.name }}" width="150" />
+
+  <!-- Bouton pour afficher l'adresse -->
+  <br />
+  <button (click)="showLocation(residence)">Show Location</button>
+
+  <!-- Bouton pour ajouter aux favoris -->
+  <button (click)="addToFavorites(residence)">❤️ Like</button>
+
+  <!-- Affichage du statut avec icônes -->
+  <p>
+    Statut:
+    <span *ngIf="residence.status === 'Disponible'">✅ Disponible</span>
+    <span *ngIf="residence.status === 'En Construction'"
+      >🚧 En Construction</span
+    >
+    <span *ngIf="residence.status === 'Vendu'">❌ Vendu</span>
+  </p>
+</div>
