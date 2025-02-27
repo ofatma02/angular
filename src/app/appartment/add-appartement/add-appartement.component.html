@@ -4,7 +4,7 @@
 
   <h2 class="text-center mb-4">Add New Apartment</h2>
 
-  <form [formGroup]="AddApart" class="container p-4 border rounded bg-light">
+  <form [formGroup]="AddApart" (ngSubmit)="onSubmit()" class="container p-4 border rounded bg-light">
 
    <div class="row mb-3">
 
@@ -14,7 +14,9 @@
 
      <input type="text" id="apartNum" class="form-control" formControlName="apartNum" />
 
-     <span style="color: red" *ngIf="AddApart.get('apartNum')?.invalid && AddApart.get('apartNum')?.touched "> Apartment Number is required!!!!! </span>
+     <span style="color: red" *ngIf="AddApart.get('apartNum')?.invalid && AddApart.get('apartNum')?.touched">
+      Apartment Number is required and must be a number!
+    </span>
 
      </div>
 
@@ -88,9 +90,9 @@
 
 
 
-     <input type="text" id="surfaceTerrace" class="form-control" formControlName="surfaceTerrace"
+    <input type="text" id="surfaceTerrace" class="form-control" formControlName="surfaceTerrace"
+    [disabled]="AddApart.get('terrace')?.value !== 'yes'" />
 
-     />
 
 
 
@@ -141,6 +143,7 @@
     <label for="residence" class="form-label">Residence:</label>
 
     <select id="residence" class="form-select" formControlName="residence">
+      
 
 
 
@@ -158,9 +161,11 @@
 
     <div class="col text-center">
 
-     <button type="submit" class="btn btn-primary me-2" [disabled]="AddApart.invalid">Add</button>
+      <button type="submit" class="btn btn-primary me-2" [disabled]="AddApart.invalid">Add</button>
 
      <button type="button" class="btn btn-secondary">Reset</button>
+     <button type="button" class="btn btn-secondary" (click)="AddApart.reset()">Reset</button>
+
 
     </div>
 
